@@ -1,0 +1,77 @@
+.wrapper {
+    display: flex;
+    height: 100vh
+}
+
+.blueSide {
+    display: flex;
+    background-color: #6ec8ff;
+    flex: 0 0 50%;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.blueSideWrapperBackground {
+    color: #1DA1F2;
+    position: absolute;
+    left: -115%;
+    top: -80%;
+    transform: translate(-50% -50%);
+    width: 350% !important;
+    height: 350% !important;
+}
+
+.buttonSide {
+    display: flex;
+    flex: 0 0 50%;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.loginSideIcon {
+    color: #1DA1F2;
+    font-size: 45px !important;
+    align-items: flex-start;
+}
+
+.button {
+    margin: 10px 0 !important
+}
+
+.buttonSideWrapper {
+    width: 380px;
+    text-align: start;
+    margin: auto;
+}
+
+.buttonSideTitle {
+    font-weight: 700;
+    font-size: 32;
+    margin: 20px 0 45px;
+}
+
+.blueSideWrapper {
+    margin: auto
+}
+
+.blueSideFeaturesItem {
+    position: relative;
+    color: white;
+    margin: 10px;
+
+}
+
+.blueSideFeaturesItem h6 {
+    display: flex;
+    font-weight: 500;
+    margin: 20px;
+
+}
+
+.blueSideFeaturesItem h6 svg {
+    margin:0 5px
+
+}

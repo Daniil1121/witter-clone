@@ -1,0 +1,43 @@
+.actual_topics,
+.actual_users {
+  background-color: rgb(230, 235, 252);
+  margin: 10px;
+  border-radius: 5px;
+
+}
+
+.actual_topics li,
+.actual_topics li,
+.actual_users li {
+  border-bottom: 1px solid #bcc3dd;
+  display: flex;
+  flex-direction: column;
+  padding-left: 3px;
+  cursor: pointer;
+}
+
+.actual_topics li h6,.actual_users li h6,
+.actual_topics li p
+ {
+  text-align: left;
+  width: 100%;
+  padding-left: 15px;
+
+}
+
+.actual_topics li p {
+  opacity: 0.6;
+
+}
+.actual_topics a {
+  text-decoration: none;
+  color: #000;
+
+}
+
+.actual_users p {
+  height: 18px;
+}
+.actual_users p:nth-child(2) {
+ opacity: 0.6;
+}

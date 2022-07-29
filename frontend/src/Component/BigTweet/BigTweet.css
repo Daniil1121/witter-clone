@@ -1,0 +1,44 @@
+.tweet {
+  padding: 10px 0;
+  border: 1px solid rgb(243, 243, 243);
+}
+.tweet:hover {
+  background-color: rgb(243, 243, 243);
+}
+.tweet a {
+text-decoration: none;
+color: #000;
+}
+
+.tweet_img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.tweet_owner p {
+ text-align: left;
+}
+
+.tweet_owner a, .tweet_owner span {
+  color: rgb(129, 129, 129);
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+.tweet_body p {
+  text-align: left;
+}
+
+.tweet_footer {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+.tweet_footer button, .tweet_footer button svg {
+  font-size: 16px; 
+  padding-right: 5px;
+  color: rgb(99, 99, 99);
+}
+ .tweet_footer button svg {
+  font-size: 18px;
+ }

@@ -1,0 +1,64 @@
+{
+  "tweets": [
+    {
+      "id": 1,
+      "_id": "62a5d64af6cc0b5088345840",
+      "user": {
+        "fullname": "Flynn Mcfadden",
+        "name": "wilson",
+        "userAvatar": "https://picsum.photos/200/200?3"
+      },
+      "text": "Labore sint cillum cillum sunt officia et labore ea ad. Culpa laborum labore pariatur dolore quis irure magna nostrud et nisi dolore laborum. Deserunt officia dolor qui exercitation."
+    },
+    {
+      "_id": "0j29t12ooni7",
+      "user": {
+        "fullname": "Flynn Mcfadden",
+        "name": "wilson",
+        "userAvatar": "https://picsum.photos/200/200?4"
+      },
+      "text": "asdwdawd",
+      "id": 2
+    },
+    {
+      "_id": "tdee0dwmba",
+      "user": {
+        "fullname": "Flynn Mcfadden",
+        "name": "wilson",
+        "userAvatar": "https://picsum.photos/200/200?4"
+      },
+      "text": "",
+      "id": 3
+    },
+    {
+      "_id": "vv9yzd0bl4a",
+      "user": {
+        "fullname": "Flynn Mcfadden",
+        "name": "wilson",
+        "userAvatar": "https://picsum.photos/200/200?3"
+      },
+      "text": "123123123123",
+      "id": 4
+    }
+  ],
+  "themes": [
+    {
+      "name": "Сочи",
+      "quantityCount": 1234
+    },
+    {
+      "name": "Компьютеры",
+      "quantityCount": 7189
+    },
+    {
+      "name": "История",
+      "quantityCount": 35484
+    }
+  ],
+  "user": {
+    "_id": "62a5d64aed4a73ea6b01bb4d",
+    "fullname": "Daniil Motunov",
+    "name": "Daniil",
+    "userAvatar": "https://avatars.mds.yandex.net/i?id=346913c294ed6e6af7dbd22857d5abb5-3717662-images-thumbs&n=13"
+  }
+}

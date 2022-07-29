@@ -1,0 +1,40 @@
+.tweet_input {
+    width: 100%;
+    padding: 5px 0;
+    border: none;
+    font-size: 16px;
+    resize: none;
+}
+
+.tweet_input:focus-visible {
+    outline: none;
+}
+
+.new_tweet_management {
+    display: flex;
+    justify-content: space-between;
+}
+
+.new_tweet_circular_progress svg {
+    width: 30px;
+    top: 5px;
+    left: -10px;
+    position: absolute;
+}
+
+.new_tweet_circular_progress.grey svg {
+    top: 45px;
+}
+
+
+.new_tweet_circular_progress.orange svg {
+    color: #ef6c00;
+}
+
+.new_tweet_circular_progress.red svg {
+    color: #d50000;
+}
+.new_tweet_length {
+    position: relative;
+    left: 30px;
+}

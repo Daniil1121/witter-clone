@@ -1,0 +1,10 @@
+.sidenav_text_button {
+font-size: 18px !important;
+font-weight: 500 !important;
+color: rgb(80, 80, 80) !important;
+}
+.sidenav_icon_button {
+  padding-right: 10px;
+  font-weight: 500 !important;
+    color: rgb(80, 80, 80) !important;
+}

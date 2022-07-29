@@ -1,0 +1,47 @@
+.App {
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+button:hover {
+  border-radius: 25px;
+}
+
+.feed_header {
+  border-bottom: 1px solid rgb(211, 211, 211);
+  text-align: left;
+  padding: 8px;
+}
+
+
+.search_input input {
+  background-color: rgb(230, 235, 252) !important;
+  padding: 5px 10px !important;
+  padding-left: 40px !important;
+  margin: 10px !important;
+  border-radius: 15px;
+}
+
+.search_input input:focus {
+border: 1px solid #1976d2;
+}
+
+.input_right_bar {
+  position: relative;
+}
+
+.input_right_bar svg {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  z-index: 2;
+  color: rgb(119, 119, 119);
+}
+form:focus-within {
+  background: #ff8;
+  color: black;
+}
+
