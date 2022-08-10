@@ -65,23 +65,24 @@ class UserController {
       };
 
       const user = await userModel.create(data);
-
-      sendEmail(
-        {
-          fromEmail: "admin@twitter.com",
-          toEMail: data.email,
-          subject: "Подтверждение почты Twitter",
-          html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:${
-            process.env.PORT || 8888
-          }/auth/verify?hash=${data.confirm_hash}">по этой ссылке</a>`,
-        },
-        function (err: Error | null, info: SentMessageInfo) {
-          if (err) {
-            console.log(err);
-          } else {
-          }
-        }
-      );
+      try {
+      } catch (error) {}
+      // sendEmail(
+      //   {
+      //     fromEmail: "admin@twitter.com",
+      //     toEMail: data.email,
+      //     subject: "Подтверждение почты Twitter",
+      //     html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:${
+      //       process.env.PORT || 8888
+      //     }/auth/verify?hash=${data.confirm_hash}">по этой ссылке</a>`,
+      //   },
+      //   function (err: Error | null, info: SentMessageInfo) {
+      //     if (err) {
+      //       console.log(err);
+      //     } else {
+      //     }
+      //   }
+      // );
 
       res.json({
         status: "success",

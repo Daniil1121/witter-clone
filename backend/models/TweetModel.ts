@@ -1,5 +1,4 @@
 import { model, Schema } from "mongoose";
-import { IUserModel } from "./UserModel";
 
 export interface ITweetModel {
   _id?: string;
@@ -26,7 +25,4 @@ const tweetSchema = new Schema<ITweetModel>(
   }
 );
 
-export const tweetModel = model<TweetModelDocumentInterface>(
-  "Tweet",
-  tweetSchema
-);
+export const tweetModel = model<TweetModelDocumentInterface>("Tweet", tweetSchema);

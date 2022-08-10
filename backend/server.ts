@@ -5,7 +5,7 @@ import express from "express";
 import { UserCtrl } from "./controllers/UserController";
 import { registerValidations } from "./validations/register";
 import { passport } from "./core/passport";
-var session = require("express-session");
+
 import "./core/db";
 import { TweetCtrl } from "./controllers/TweetController";
 
@@ -15,38 +15,18 @@ app.use(passport.initialize());
 app.use(express.json());
 
 app.get("/users", UserCtrl.index);
-app.get(
-  "/users/me",
-  passport.authenticate("jwt", { session: false }),
-  UserCtrl.getMyProfile
-);
+app.get("/users/me", passport.authenticate("jwt", { session: false }), UserCtrl.getMyProfile);
 app.get("/users/:userId", UserCtrl.show);
 
 app.get("/auth/verify", UserCtrl.verify);
-app.post(
-  "/auth/login",
-  passport.authenticate("local", { session: false }),
-  UserCtrl.afterLogin
-);
+app.post("/auth/login", passport.authenticate("local", { session: false }), UserCtrl.afterLogin);
 app.post("/auth/register", registerValidations, UserCtrl.create);
 
 app.get("/tweets/:tweetId", TweetCtrl.show);
 app.get("/tweets", TweetCtrl.index);
-app.post(
-  "/tweets/create",
-  passport.authenticate("jwt", { session: false }),
-  TweetCtrl.create
-);
-app.delete(
-  "/tweets/:tweetId",
-  passport.authenticate("jwt", { session: false }),
-  TweetCtrl.delete
-);
-app.patch(
-  "/tweets/:tweetId",
-  passport.authenticate("jwt", { session: false }),
-  TweetCtrl.update
-);
+app.post("/tweets/create", passport.authenticate("jwt", { session: false }), TweetCtrl.create);
+app.delete("/tweets/:tweetId", passport.authenticate("jwt", { session: false }), TweetCtrl.delete);
+app.patch("/tweets/:tweetId", passport.authenticate("jwt", { session: false }), TweetCtrl.update);
 
 // app.patch("/users", UserCtrl.update);
 // app.delete("/users", UserCtrl.delete);

@@ -15,7 +15,7 @@ class TweetController {
           user: await userModel.findById({ _id: tweet.user }).exec(),
         });
       });
-      console.log(arr);
+
       res.json({
         status: "success",
         data: tweets,
@@ -58,9 +58,11 @@ class TweetController {
   }
   async create(req: express.Request, res: express.Response) {
     try {
+      const user = req.user as IUserModel;
+
       const data: ITweetModel = {
         text: req.body.text,
-        user: req.body.user,
+        user: user._id!,
       };
 
       const tweet = await tweetModel.create(data);
