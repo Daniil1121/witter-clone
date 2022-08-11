@@ -27,7 +27,7 @@ export const Tweet: React.FC<TweetProps> = ({
   return (
     <>
       <Box className="tweet">
-        <Link to={`/home/tweet?_id=${_id}`}>
+        <Link to={`/home/tweet?tweetId=${_id}`}>
           <Grid container>
             <Grid item xs={1}>
               <Avatar

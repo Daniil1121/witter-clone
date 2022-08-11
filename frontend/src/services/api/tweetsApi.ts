@@ -1,16 +1,19 @@
 import axios from "axios";
-import {
-  ITweet,
-  ITweetsState,
-} from "./../../store/ducks/tweets/contracts/state";
+import { ITweet, ITweetsState } from "./../../store/ducks/tweets/contracts/state";
+
+export interface Response<T> {
+  status: "string";
+  data: T;
+}
 
 export const tweetsApi = {
-  fetchTWeetsAPI(): Promise<ITweetsState["items"]> {
-    return axios.get("/tweets").then(({ data }) => data);
+  async fetchTWeetsAPI(): Promise<ITweet[]> {
+    const { data } = await axios.get<Response<ITweet[]>>("/tweets");
+    return data.data;
   },
-  async fetchTWeetByIdAPI(id: string): Promise<ITweet[]> {
-    const response = await axios.get(`/tweets?_id=${id}`);
-    const data: ITweet[] = await response.data;
+  async fetchTWeetByIdAPI(id: string): Promise<Response<ITweet>> {
+    const { data } = await axios.get(`/tweets/${id}`);
+    debugger;
     return data;
   },
   fetchAddNewTWeetAPI(data: ITweet): Promise<ITweet[]> {

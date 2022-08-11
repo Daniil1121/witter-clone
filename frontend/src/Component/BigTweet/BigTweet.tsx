@@ -9,11 +9,12 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ReplyIcon from "@mui/icons-material/Reply";
 import { Link, useSearchParams } from "react-router-dom";
 import { ITweet } from "../../store/ducks/tweets/contracts/state";
-import { tweetsApi } from "./../../services/api/tweetsApi";
+import { Response, tweetsApi } from "./../../services/api/tweetsApi";
 
 export const BigTweet: React.FC = (): React.ReactElement => {
   const [searchParams] = useSearchParams();
-  const _idSearch: string = searchParams.get("_id")!;
+  const _idSearch: string = searchParams.get("tweetId")!;
+
   const [tweet, setTweet] = useState<ITweet>({
     _id: "",
     user: {
@@ -26,15 +27,15 @@ export const BigTweet: React.FC = (): React.ReactElement => {
 
   useEffect(() => {
     (async function () {
-      const data: ITweet[] = await tweetsApi.fetchTWeetByIdAPI(_idSearch);
-      setTweet(data[0]);
+      const data: Response<ITweet> = await tweetsApi.fetchTWeetByIdAPI(_idSearch);
+      setTweet(data.data);
     })();
   }, []);
 
   return (
     <>
       <Box className="tweet">
-        <Link to={`/home/tweet?_id=${tweet._id}`}>
+        <Link to={`/home/tweet/${tweet._id}`}>
           <Grid container>
             <Grid item xs={1}>
               <Avatar

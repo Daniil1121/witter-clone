@@ -1,12 +1,5 @@
-import React from "react";
-import {
-  Button,
-  TextField,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  Typography,
-} from "@mui/material";
+import React, { ReactEventHandler, useState } from "react";
+import { Button, TextField, Dialog, DialogActions, DialogContent, Typography } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -16,17 +9,28 @@ interface IPropModal {
 }
 
 const FormDialog: React.FC<IPropModal> = ({ open, handleClose }) => {
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const changeUserNameHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setUserName(e.target.value);
+  };
+
+  const changePasswordHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setPassword(e.target.value);
+  };
+
+  const login = (): void => {};
+
   return (
     <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogContent>
           <CloseIcon onClick={handleClose} />
           <Typography variant="h6">Войти в Твиттер</Typography>
           <TextField
+            value={userName}
+            onChange={changeUserNameHandler}
             autoFocus
             margin="dense"
             id="email"
@@ -35,6 +39,8 @@ const FormDialog: React.FC<IPropModal> = ({ open, handleClose }) => {
             fullWidth
           />
           <TextField
+            value={password}
+            onChange={changePasswordHandler}
             autoFocus
             margin="dense"
             id="password"

@@ -7,17 +7,13 @@ import {
   setTweetsLoadingState,
   TweetsActionType,
 } from "./actionCreators/actionCreators";
-import { tweetsApi } from "./../../../services/api/tweetsApi";
-import {
-  AddingTweetState,
-  ITweetsState,
-  LoadingState,
-} from "./contracts/state";
+import { Response, tweetsApi } from "./../../../services/api/tweetsApi";
+import { AddingTweetState, ITweetsState, LoadingState } from "./contracts/state";
 
 export function* fetchTweetsRequest() {
   try {
-    const items: ITweetsState["items"] = yield call(tweetsApi.fetchTWeetsAPI);
-    yield put(setTweets(items.reverse()));
+    const response: ITweetsState["items"] = yield call(tweetsApi.fetchTWeetsAPI);
+    yield put(setTweets(response.reverse()));
   } catch (error) {
     yield put(setTweetsLoadingState(LoadingState.ERROR));
   }
@@ -30,9 +26,7 @@ export function* addTweetRequest({ payload }: IAddNewTweetAction) {
       user: {
         fullname: "Flynn Mcfadden",
         name: "wilson",
-        userAvatar: `https://picsum.photos/200/200?${Math.ceil(
-          Math.random() * 10
-        )}`,
+        userAvatar: `https://picsum.photos/200/200?${Math.ceil(Math.random() * 10)}`,
       },
       text: payload,
     };

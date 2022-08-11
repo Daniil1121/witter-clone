@@ -6,15 +6,21 @@ import { isValid } from "./../utils/isValidObjectId";
 class TweetController {
   async index(_: any, res: express.Response): Promise<void> {
     try {
-      const tweets = await tweetModel.find({}).exec();
-      const arr: any = [];
+      const tweets = await tweetModel.find({}).populate("user").exec();
 
-      tweets.forEach(async (tweet) => {
-        arr.push({
-          text: tweet.text,
-          user: await userModel.findById({ _id: tweet.user }).exec(),
-        });
-      });
+      // newArrayTweets = tweets.map(async (tweet) => {
+      //   return {
+      //     text: tweet.text,
+      //     user: await userModel.findById({ _id: tweet.user }).exec(),
+      //   };
+      // });
+
+      // tweets.forEach(async (tweet) => {
+      //   arr.push({
+      //     text: tweet.text,
+      //     user: await userModel.findById({ _id: tweet.user }).exec(),
+      //   });
+      // });
 
       res.json({
         status: "success",
@@ -35,11 +41,7 @@ class TweetController {
         return;
       }
 
-      const tweet = await tweetModel.findById({ _id: tweetId }).exec();
-      const user = await userModel
-        .findById({ _id: tweet?.user })
-        .select(["-email", "-confirmed"])
-        .exec();
+      const tweet = await tweetModel.findById({ _id: tweetId }).populate("user").exec();
 
       if (!tweet) {
         res.status(404).send("Couldn't find user by id");
@@ -47,7 +49,7 @@ class TweetController {
       }
       res.json({
         status: "success",
-        data: user,
+        data: tweet,
       });
     } catch (error) {
       res.status(500).json({
