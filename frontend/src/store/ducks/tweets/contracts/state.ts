@@ -13,9 +13,10 @@ export enum AddingTweetState {
 
 export interface ITweet {
   _id: string;
+  createdAt: string;
   user: {
     fullname: string;
-    name: string;
+    username: string;
     userAvatar: string;
   };
   text: string;

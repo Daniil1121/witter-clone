@@ -1,7 +1,12 @@
-import React, { ReactEventHandler, useState } from "react";
+import React, { ReactEventHandler, useEffect, useState } from "react";
 import { Button, TextField, Dialog, DialogActions, DialogContent, Typography } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLoginUser } from "../../store/ducks/user/actionCreators";
+
+import { selectUser } from "../../store/ducks/user/selectors";
+import { useNavigate } from "react-router-dom";
 
 interface IPropModal {
   open: boolean;
@@ -12,6 +17,8 @@ const FormDialog: React.FC<IPropModal> = ({ open, handleClose }) => {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const dispatch = useDispatch();
+
   const changeUserNameHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setUserName(e.target.value);
   };
@@ -20,7 +27,17 @@ const FormDialog: React.FC<IPropModal> = ({ open, handleClose }) => {
     setPassword(e.target.value);
   };
 
-  const login = (): void => {};
+  const login = (): void => {
+    dispatch(fetchLoginUser({ username: userName, password }));
+  };
+
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  }, [user]);
 
   return (
     <div>
@@ -50,7 +67,7 @@ const FormDialog: React.FC<IPropModal> = ({ open, handleClose }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" variant="contained">
+          <Button onClick={login} color="primary" variant="contained">
             Войти
           </Button>
           <Button onClick={handleClose} color="primary">

@@ -5,6 +5,7 @@ import rootSaga from "./sagas";
 import { ITweetsState } from "./ducks/tweets/contracts/state";
 import { ITopicState } from "./ducks/actualTopics/contracts/state";
 import { IActualAccountState } from "./ducks/actualAccount/state";
+import { IUserState } from "./ducks/user/state";
 
 declare global {
   interface Window {
@@ -13,9 +14,7 @@ declare global {
 }
 
 const composeEnhancers =
-  (typeof window !== "undefined" &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose;
+  (typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -23,11 +22,9 @@ export interface IRootState {
   tweets: ITweetsState;
   topics: ITopicState;
   accounts: IActualAccountState;
+  user: IUserState;
 }
 
-export const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(sagaMiddleware))
-);
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(rootSaga);

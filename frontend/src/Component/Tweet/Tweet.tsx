@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Avatar, Grid, IconButton, Typography } from "@mui/material";
 import "./tweet.css";
-
+import moment from "moment";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -10,16 +10,17 @@ import ReplyIcon from "@mui/icons-material/Reply";
 import { Link } from "react-router-dom";
 
 interface TweetProps {
+  createdAt: string;
   user: {
     fullname: string;
-    name: string;
+    username: string;
     userAvatar: string;
   };
   _id: string;
   text: string;
 }
-
 export const Tweet: React.FC<TweetProps> = ({
+  createdAt,
   user,
   text,
   _id,
@@ -40,8 +41,8 @@ export const Tweet: React.FC<TweetProps> = ({
               <Box className="tweet_owner">
                 <Typography>
                   <b>{user.fullname}</b>
-                  <a>@{user.name}</a>
-                  <span>· 1 ч</span>
+                  <a>@{user.username}</a>
+                  <span>· {moment(createdAt).fromNow()}</span>
                 </Typography>
               </Box>
               <Box className="tweet_body">

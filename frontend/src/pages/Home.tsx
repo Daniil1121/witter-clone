@@ -19,16 +19,29 @@ import { RightMenu } from "./../Component/RightMenu/RightMenu";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import { BigTweet } from "../Component/BigTweet/BigTweet";
+import { selectUser } from "../store/ducks/user/selectors";
+import { getMyProfile } from "../store/ducks/user/actionCreators";
 
 export const Home: React.FC = (): React.ReactElement => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   const tweets = useSelector(selectTweetsItems);
   const loadingStatus = useSelector(selectLoadingState);
+  const user = useSelector(selectUser);
+
   const navigate = useNavigate();
   useEffect(() => {
-    dispath(fetchTweets());
+    dispatch(fetchTweets());
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("twitter-token");
+    if (!token) {
+      navigate("/login");
+    } else if (token && !user) {
+      dispatch(getMyProfile());
+    }
+  }, [user]);
 
   return (
     <Container>
@@ -85,7 +98,13 @@ export const Home: React.FC = (): React.ReactElement => {
                     element={
                       tweets &&
                       tweets.map((x) => (
-                        <Tweet key={x._id} _id={x._id} user={x.user} text={x.text} />
+                        <Tweet
+                          createdAt={x.createdAt}
+                          key={x._id}
+                          _id={x._id}
+                          user={x.user}
+                          text={x.text}
+                        />
                       ))
                     }
                   ></Route>

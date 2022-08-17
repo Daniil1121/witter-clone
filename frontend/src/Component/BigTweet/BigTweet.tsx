@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { Avatar, Grid, IconButton, Typography } from "@mui/material";
 import "./BigTweet.css";
-
+import moment from "moment";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -17,9 +17,10 @@ export const BigTweet: React.FC = (): React.ReactElement => {
 
   const [tweet, setTweet] = useState<ITweet>({
     _id: "",
+    createdAt: "",
     user: {
       fullname: "",
-      name: "",
+      username: "",
       userAvatar: "",
     },
     text: "",
@@ -31,6 +32,9 @@ export const BigTweet: React.FC = (): React.ReactElement => {
       setTweet(data.data);
     })();
   }, []);
+  if (!tweet._id) {
+    return <></>;
+  }
 
   return (
     <>
@@ -48,8 +52,8 @@ export const BigTweet: React.FC = (): React.ReactElement => {
               <Box className="tweet_owner">
                 <Typography>
                   <b>{tweet.user.fullname}</b>
-                  <a>@{tweet.user.name}</a>
-                  <span>· 1 ч</span>
+                  <a>@{tweet.user.username}</a>
+                  <span>· {moment(tweet.createdAt).fromNow()}</span>
                 </Typography>
               </Box>
               <Box className="tweet_body">

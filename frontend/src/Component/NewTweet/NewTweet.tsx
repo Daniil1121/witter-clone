@@ -20,19 +20,20 @@ import { selectAddingNewTweetState } from "../../store/ducks/tweets/selectors";
 import { AddingTweetState } from "./../../store/ducks/tweets/contracts/state";
 
 export const NewTweet: React.FC = (): React.ReactElement => {
+  const dispatch = useDispatch();
+  const AddingNewPostState: string = useSelector(selectAddingNewTweetState);
+
   const [tweetText, setTweetText] = useState<string>("");
+  const [open, setOpen] = React.useState(false);
+
   const inputHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTweetText(event.target.value);
   };
 
-  const dispatch = useDispatch();
-
-  const AddingNewPostState: string = useSelector(selectAddingNewTweetState);
-
   const addNewTweetHandler = (): void => {
+    setTweetText("");
     dispatch(addNewTweet(tweetText));
   };
-  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     if (AddingNewPostState === AddingTweetState.ERROR) {

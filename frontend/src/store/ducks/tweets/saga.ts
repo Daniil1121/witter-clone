@@ -22,12 +22,6 @@ export function* fetchTweetsRequest() {
 export function* addTweetRequest({ payload }: IAddNewTweetAction) {
   try {
     const data = {
-      _id: Math.random().toString(36).substring(2),
-      user: {
-        fullname: "Flynn Mcfadden",
-        name: "wilson",
-        userAvatar: `https://picsum.photos/200/200?${Math.ceil(Math.random() * 10)}`,
-      },
       text: payload,
     };
     yield call(tweetsApi.fetchAddNewTWeetAPI, data);
