@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import { Avatar, Grid, IconButton, Typography } from "@mui/material";
 import "./tweet.css";
 import moment from "moment";
+import "moment/locale/ru";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";

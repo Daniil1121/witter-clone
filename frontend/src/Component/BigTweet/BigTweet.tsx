@@ -53,7 +53,6 @@ export const BigTweet: React.FC = (): React.ReactElement => {
                 <Typography>
                   <b>{tweet.user.fullname}</b>
                   <a>@{tweet.user.username}</a>
-                  <span>· {moment(tweet.createdAt).fromNow()}</span>
                 </Typography>
               </Box>
               <Box className="tweet_body">
@@ -74,6 +73,9 @@ export const BigTweet: React.FC = (): React.ReactElement => {
                 <IconButton>
                   <ReplyIcon />2
                 </IconButton>
+              </Box>
+              <Box className="created_time">
+                <span>{moment(tweet.createdAt).format("lll")}</span>
               </Box>
             </Grid>
           </Grid>
