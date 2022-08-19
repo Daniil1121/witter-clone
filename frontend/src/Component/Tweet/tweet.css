@@ -1,13 +1,14 @@
 .tweet {
   padding: 10px 0;
   border: 1px solid rgb(243, 243, 243);
+  position: relative;
 }
 .tweet:hover {
   background-color: rgb(243, 243, 243);
 }
 .tweet a {
-text-decoration: none;
-color: #000;
+  text-decoration: none;
+  color: #000;
 }
 
 .tweet_img {
@@ -15,11 +16,18 @@ color: #000;
   height: 50px;
   border-radius: 50%;
 }
+.tweet_owner {
+  display: flex;
+  justify-content: space-between;
+}
 .tweet_owner p {
- text-align: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.tweet_owner a, .tweet_owner span {
+.tweet_owner a,
+.tweet_owner span {
   color: rgb(129, 129, 129);
   margin-left: 5px;
   text-decoration: none;
@@ -34,11 +42,12 @@ color: #000;
   justify-content: space-between;
   width: 80%;
 }
-.tweet_footer button, .tweet_footer button svg {
-  font-size: 16px; 
+.tweet_footer button,
+.tweet_footer button svg {
+  font-size: 16px;
   padding-right: 5px;
   color: rgb(99, 99, 99);
 }
- .tweet_footer button svg {
+.tweet_footer button svg {
   font-size: 18px;
- }
+}

@@ -9,6 +9,10 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ReplyIcon from "@mui/icons-material/Reply";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 interface TweetProps {
   createdAt: string;
@@ -26,6 +30,18 @@ export const Tweet: React.FC<TweetProps> = ({
   text,
   _id,
 }: TweetProps): React.ReactElement => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+
+    setAnchorEl(null);
+  };
+
   return (
     <>
       <Box className="tweet">
@@ -45,7 +61,34 @@ export const Tweet: React.FC<TweetProps> = ({
                   <a>@{user.username}</a>
                   <span>· {moment(createdAt).fromNow()}</span>
                 </Typography>
+                <Box className="control_button">
+                  <div>
+                    <IconButton
+                      aria-label="more"
+                      id="long-button"
+                      aria-controls={open ? "long-menu" : undefined}
+                      aria-expanded={open ? "true" : undefined}
+                      aria-haspopup="true"
+                      onClick={handleClick}
+                    >
+                      <MoreVertIcon />
+                    </IconButton>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
+                      <MenuItem onClick={handleClose}>Edit tweet</MenuItem>
+                      <MenuItem onClick={handleClose}>Delete tweet</MenuItem>
+                    </Menu>
+                  </div>
+                </Box>
               </Box>
+
               <Box className="tweet_body">
                 <Typography variant="body1" gutterBottom>
                   {text}
