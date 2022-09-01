@@ -26,7 +26,10 @@ export const tweetsApi = {
     const { data } = await createAndReturnInstance().get(`/tweets/${id}`);
     return data;
   },
-  fetchAddNewTWeetAPI(data: { text: string }): Promise<ITweet[]> {
+  async deleteTWeetByIdAPI(id: ITweet["_id"]) {
+    const { data } = await createAndReturnInstance().delete(`/tweets/${id}`);
+  },
+  async addNewTWeetAPI(data: { text: string }): Promise<ITweet[]> {
     return createAndReturnInstance()
       .post("/tweets/create", data)
       .then(({ data }) => data);

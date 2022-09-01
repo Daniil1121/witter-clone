@@ -1,9 +1,11 @@
 import {
+  Alert,
   CircularProgress,
   Container,
   Grid,
   IconButton,
   InputBase,
+  Snackbar,
   Typography,
 } from "@mui/material";
 import React, { useEffect } from "react";
@@ -13,7 +15,11 @@ import { SideMenu } from "../Component/SideMenu/SideMenu";
 import { NewTweet } from "../Component/NewTweet/NewTweet";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTweets } from "./../store/ducks/tweets/actionCreators/actionCreators";
-import { selectLoadingState, selectTweetsItems } from "./../store/ducks/tweets/selectors";
+import {
+  selectDeleteTweetState,
+  selectLoadingState,
+  selectTweetsItems,
+} from "./../store/ducks/tweets/selectors";
 import { LoadingState } from "../store/ducks/tweets/contracts/state";
 import { RightMenu } from "./../Component/RightMenu/RightMenu";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -24,15 +30,24 @@ import { getMyProfile } from "../store/ducks/user/actionCreators";
 
 export const Home: React.FC = (): React.ReactElement => {
   const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false);
 
+  const tweetDeleteState = useSelector(selectDeleteTweetState);
   const tweets = useSelector(selectTweetsItems);
   const loadingStatus = useSelector(selectLoadingState);
   const user = useSelector(selectUser);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(fetchTweets());
   }, []);
+
+  useEffect(() => {
+    if (tweetDeleteState === "ERROR") {
+      setOpen(true);
+    }
+  }, [tweetDeleteState]);
 
   useEffect(() => {
     const token = localStorage.getItem("twitter-token");
@@ -45,6 +60,19 @@ export const Home: React.FC = (): React.ReactElement => {
 
   return (
     <Container>
+      <Snackbar
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        autoHideDuration={2000}
+      >
+        <Alert severity="error" sx={{ width: "100%" }}>
+          Ошибка при удалении твита :(
+        </Alert>
+      </Snackbar>
+
       <Grid container>
         <Grid sx={{ paddingRight: "10px" }} xs={2.5} item>
           <SideMenu />

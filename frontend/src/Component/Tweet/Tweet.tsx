@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { Avatar, Grid, IconButton, Typography } from "@mui/material";
+import { Alert, Avatar, Grid, IconButton, Snackbar, Typography } from "@mui/material";
 import "./tweet.css";
 import moment from "moment";
 import "moment/locale/ru";
@@ -9,11 +9,15 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ReplyIcon from "@mui/icons-material/Reply";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
+import { tweetsApi } from "../../services/api/tweetsApi";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTweetAction } from "../../store/ducks/tweets/actionCreators/actionCreators";
+import { selectDeleteTweetState } from "../../store/ducks/tweets/selectors";
+import { ITweetsState } from "../../store/ducks/tweets/contracts/state";
+import SyncSharpIcon from "@mui/icons-material/SyncSharp";
 interface TweetProps {
   createdAt: string;
   user: {
@@ -24,6 +28,7 @@ interface TweetProps {
   _id: string;
   text: string;
 }
+
 export const Tweet: React.FC<TweetProps> = ({
   createdAt,
   user,
@@ -31,7 +36,13 @@ export const Tweet: React.FC<TweetProps> = ({
   _id,
 }: TweetProps): React.ReactElement => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const tweetDeleteState: ITweetsState["deleteTweetState"] = useSelector(selectDeleteTweetState);
+
+  const [pending, setPending] = useState<Boolean>(false);
+
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setAnchorEl(event.currentTarget);
@@ -42,9 +53,22 @@ export const Tweet: React.FC<TweetProps> = ({
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    if (tweetDeleteState === "NEVER") {
+      setPending(false);
+    }
+  }, [tweetDeleteState]);
+
+  const deleteTweet = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setPending(true);
+    dispatch(deleteTweetAction(_id));
+  };
+
   return (
     <>
-      <Box className="tweet">
+      <Box className={`tweet ${pending && "loading"}`}>
         <Link to={`/home/tweet?tweetId=${_id}`}>
           <Grid container>
             <Grid item xs={1}>
@@ -83,7 +107,7 @@ export const Tweet: React.FC<TweetProps> = ({
                       }}
                     >
                       <MenuItem onClick={handleClose}>Edit tweet</MenuItem>
-                      <MenuItem onClick={handleClose}>Delete tweet</MenuItem>
+                      <MenuItem onClick={deleteTweet}>Delete tweet</MenuItem>
                     </Menu>
                   </div>
                 </Box>
@@ -111,6 +135,7 @@ export const Tweet: React.FC<TweetProps> = ({
             </Grid>
           </Grid>
         </Link>
+        {pending && <SyncSharpIcon className="loading_icon" />}
       </Box>
     </>
   );
